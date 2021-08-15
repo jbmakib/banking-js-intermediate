@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <h1 class="text-5xl text-center mt-8">Let's Get Some Money!!
+        <h1 class="text-5xl text-center mt-8">Let's make Money!!
             <span class="font-semibold text-purple-700" id="fullName-dash"></span>
         </h1>
     </header>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="bg-yellow-300 p-8 rounded">
                     <h3 class="text-2xl">Balance</h3>
-                    <h4 class="text-4xl">$<span id="balance-total">1240</span></h4>
+                    <h4 class="text-4xl">$<span id="balance-total">00</span></h4>
                 </div>
             </div>
         </section>
@@ -38,25 +38,25 @@
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-red-100 p-8 rounded">
                     <h3 class="text-3xl mb-2">Deposit</h3>
-                    <div>
-                        <input id="deposit-input" type="text" placeholder="Your Amount($)"
-                            class="border border-gray-400 rounded block w-full mb-4 px-2 h-10">
+                    <form>
+                        <input id="deposit-input" type="number" placeholder="Your Amount($)"
+                            class="border border-gray-400 rounded block w-full mb-4 px-2 h-10" required>
                         <input id="deposit-password" type="password" placeholder="Your Password"
-                            class="border border-gray-400 rounded block w-full mb-4 px-2 h-10">
+                            class="border border-gray-400 rounded block w-full mb-4 px-2 h-10" required>
                         <button id="deposit-button"
                             class="bg-yellow-600 px-4 rounded py-2 text-white font-semibold block">Deposit</button>
-                    </div>
+                    </form>
                 </div>
                 <div class="bg-purple-100 p-8 rounded">
                     <h3 class="text-3xl mb-2">Withdraw</h3>
-                    <div>
-                        <input id="withdraw-input" type="text" placeholder="Your Amount($)"
-                            class="border border-gray-400 rounded block w-full mb-4 px-2 h-10">
+                    <form>
+                        <input id="withdraw-input" type="number" placeholder="Your Amount($)"
+                            class="border border-gray-400 rounded block w-full mb-4 px-2 h-10" required>
                         <input id="withdraw-password" type="password" placeholder="Your Password"
-                            class="border border-gray-400 rounded block w-full mb-4 px-2 h-10">
+                            class="border border-gray-400 rounded block w-full mb-4 px-2 h-10" required>
                         <button id="withdraw-button"
                             class="bg-yellow-600 px-4 rounded py-2 text-white font-semibold block">Withdraw</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </section>
