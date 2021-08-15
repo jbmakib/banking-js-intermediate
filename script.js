@@ -54,16 +54,12 @@ JSON.parse(localStorage.getItem("last-logged-in")).status = false;
 let lastLoggedIn = JSON.parse(localStorage.getItem("last-logged-in"));
 console.log(lastLoggedIn)
 
-function welcome(fullName) {
-    show(boxField);
-    boxField.innerHTML = `<div class="form"><h1>Welcome</h1><h2>${fullName}</h2><input type="button" value="Logout" onclick="logout()" class="logout-btn"></div>`;
-};
 
 function lastLoggedInStatus() {
     if (lastLoggedIn.status == true) {
-        welcome(lastLoggedIn.user);
-        hide(loginFormField);
-        hide(signUpFormField);
+        window.location.href = "dashboard"
+    } else {
+        window.location.href
     }
 }
 lastLoggedInStatus();
@@ -91,12 +87,11 @@ function login(e) {
             hide(loginFormField);
             show(boxField);
 
-            // store the full name in a variable
-            var fullName = loginVar[i].fullName;
-            welcome(fullName);
 
             // login true
             localStorage.setItem("last-logged-in", JSON.stringify({ user: loginVar[i].fullName, userID: loginVar[i].userName, password: loginVar[i].passWord, status: true }));
+
+            window.location.href = "dashboard";
 
         } else if ((usernameField != "" && usernameField == loginVar[i].userName) && (pwdField != "" && pwdField != loginVar[i].passWord)) {
             window.alert("Password not matched");
@@ -201,17 +196,16 @@ function signUp(e) {
     // add this into a variable.
     var fullName = loginVar[loginVar.length - 1].fullName;
 
-    // show the output
-    welcome(fullName);
-
     // login true
 
     localStorage.setItem("last-logged-in", JSON.stringify({ user: fullNameSign, userID: userName, password: signpwd, status: true }));
 
-}
+    window.location.href = "dashboard";
+};
 
 
 // if logout button is clicked this function will run.
+/*
 function logout() {
 
     // make the input field blank
@@ -224,4 +218,5 @@ function logout() {
 
     // login false
     localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: false }));
-}
+};
+ */

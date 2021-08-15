@@ -1,6 +1,8 @@
-
-
-
+let lastLoggedInData = JSON.parse(localStorage.getItem("last-logged-in"));
+console.log(lastLoggedInData)
+if (lastLoggedInData.status == false) {
+    window.location.href = "../";
+}
 
 // deposit
 document.getElementById('deposit-button').addEventListener("click", function () {
@@ -54,3 +56,5 @@ document.getElementById("withdraw-button").addEventListener("click", function ()
 function welcome(username, password, fullname) {
     document.getElementById("fullName-dash").innerText = fullname;
 }
+
+// logout
