@@ -30,7 +30,7 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
         window.alert("Please Enter Valid Deposit Amount");
         return;
     } else if (inpPass.value == "") {
-        window.alert("Please Enter Valid Deposit Amount");
+        window.alert("Password can't be blank");
         return;
     }
 
@@ -40,6 +40,10 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
         return;
     }
     const newDepositAmount = parseFloat(depositInput.value);
+    if (newDepositAmount <= 0) {
+        window.alert("You can't deposit less than or equal to taka zero");
+        return;
+    }
 
 
     // update deposit total
@@ -58,6 +62,7 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
     balanceTotal.innerText = newBalanceTotal;
     // clear input field
     depositInput.value = '';
+    inpPass.value = "";
 });
 
 // withdraw
@@ -66,19 +71,19 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
 
 
     // get the pass
-    const inpPass = document.getElementById("deposit-password");
+    const inpPass = document.getElementById("withdraw-password");
     // get the amount withdrawed
     const withdrawInput = document.getElementById("withdraw-input");
 
     // return if the password or ammount is blank
-    if (depositInput.value == "" && inpPass.value == "") {
-        window.alert("Deposit Amount and Password can't be blank");
+    if (withdrawInput.value == "" && inpPass.value == "") {
+        window.alert("WithDraw Amount and Password can't be blank");
         return;
-    } else if (depositInput.value == "") {
-        window.alert("Please Enter Valid Deposit Amount");
+    } else if (withdrawInput.value == "") {
+        window.alert("Please Enter Valid Withdraw Amount");
         return;
     } else if (inpPass.value == "") {
-        window.alert("Please Enter Valid Deposit Amount");
+        window.alert("Password can't be blank");
         return;
     }
 
@@ -94,18 +99,29 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
     const previuosWithdrawTotal = parseFloat(withdrawTotal.innerText);
 
     const newWithdrawTotal = previuosWithdrawTotal + newWithdrawAmount;
-    withdrawTotal.innerText = newWithdrawTotal;
 
 
     // update account balance
     const balanceTotal = document.getElementById("balance-total");
     const previousBalanceTotal = parseFloat(balanceTotal.innerText);
 
+    // returns if previuos balane is smaller than withdraw.
+    if (newWithdrawAmount <= 0) {
+        window.alert("You can;t withdraw less than or equal to taka zero");
+        return;
+    } else if (newWithdrawAmount > previousBalanceTotal) {
+        window.alert("You can't withdraw more amount than you have");
+        return;
+    }
+
+    withdrawTotal.innerText = newWithdrawTotal;
+
     const newBalanceTotal = previousBalanceTotal - newWithdrawAmount;
     balanceTotal.innerText = newBalanceTotal;
 
     // clear input field
     withdrawInput.value = '';
+    inpPass.value = "";
 });
 
 
