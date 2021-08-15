@@ -59,4 +59,5 @@ function welcome(username, password, fullname) {
 
 function logout() {
     localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: false }));
+    window.location.href = "../";
 }
