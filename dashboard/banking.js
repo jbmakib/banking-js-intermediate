@@ -1,9 +1,10 @@
 let lastLoggedInData = JSON.parse(localStorage.getItem("last-logged-in"));
-console.log(lastLoggedInData)
+
 if (lastLoggedInData === null) {
-    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", status: false }));
-}
-if (JSON.parse(localStorage.getItem("last-logged-in")).status != true) {
+    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: "F1fis8x6fsPxptlbjmEFE6g9dxw1Qi0gHAc0ykhsEQE=" }));
+};
+
+if (JSON.parse(localStorage.getItem("last-logged-in")).status != "knvteHd+BZKZDQuvi9nDsS8IO+o4cr33/fgmPqCFAIY=") {
     window.location.href = "../";
 };
 
@@ -109,6 +110,6 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
 
 
 function logout() {
-    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: false }));
+    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: "F1fis8x6fsPxptlbjmEFE6g9dxw1Qi0gHAc0ykhsEQE=" }));
     window.location.href = "../";
 };

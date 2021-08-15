@@ -51,17 +51,15 @@ function hide(element) {
 // last login status and name
 
 if (localStorage.getItem("last-logged-in") === null) {
-    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: false }));
+    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: "F1fis8x6fsPxptlbjmEFE6g9dxw1Qi0gHAc0ykhsEQE=" }));
 }
 
 let lastLoggedIn = JSON.parse(localStorage.getItem("last-logged-in"));
 
 function lastLoggedInStatus() {
-    if (lastLoggedIn.status == true) {
-        window.location.href = "dashboard"
-    } else {
-        window.location.href
-    }
+    if (lastLoggedIn.status == "knvteHd+BZKZDQuvi9nDsS8IO+o4cr33/fgmPqCFAIY=") {
+        window.location.href = "dashboard";
+    };
 }
 lastLoggedInStatus();
 
@@ -90,7 +88,7 @@ function login(e) {
 
 
             // login true
-            localStorage.setItem("last-logged-in", JSON.stringify({ user: loginVar[i].fullName, userID: loginVar[i].userName, password: loginVar[i].passWord, status: true }));
+            localStorage.setItem("last-logged-in", JSON.stringify({ user: loginVar[i].fullName, userID: loginVar[i].userName, password: loginVar[i].passWord, status: "knvteHd+BZKZDQuvi9nDsS8IO+o4cr33/fgmPqCFAIY=" }));
 
             window.location.href = "dashboard";
 
@@ -199,7 +197,7 @@ function signUp(e) {
 
     // login true
 
-    localStorage.setItem("last-logged-in", JSON.stringify({ user: fullNameSign, userID: userName, password: signpwd, status: true }));
+    localStorage.setItem("last-logged-in", JSON.stringify({ user: fullNameSign, userID: userName, password: signpwd, status: "knvteHd+BZKZDQuvi9nDsS8IO+o4cr33/fgmPqCFAIY=" }));
 
     window.location.href = "dashboard";
 };
