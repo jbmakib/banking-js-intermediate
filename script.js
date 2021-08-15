@@ -49,14 +49,15 @@ function hide(element) {
 
 
 // last login status and name
-JSON.parse(localStorage.getItem("last-logged-in")).status = false;
 
 let lastLoggedIn = JSON.parse(localStorage.getItem("last-logged-in"));
-console.log(lastLoggedIn)
+if (lastLoggedIn === null) {
+    localStorage.setItem("last-logged-in", JSON.stringify({ status: false }));
+}
 
 
 function lastLoggedInStatus() {
-    if (lastLoggedIn.status == true) {
+    if (JSON.parse(localStorage.getItem("last-logged-in")).status == true) {
         window.location.href = "dashboard"
     } else {
         window.location.href

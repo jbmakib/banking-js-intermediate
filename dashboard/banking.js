@@ -1,6 +1,6 @@
 let lastLoggedInData = JSON.parse(localStorage.getItem("last-logged-in"));
 console.log(lastLoggedInData)
-if (lastLoggedInData.status == false) {
+if (lastLoggedInData.status != true) {
     window.location.href = "../";
 };
 
