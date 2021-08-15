@@ -202,21 +202,3 @@ function signUp(e) {
 
     window.location.href = "dashboard";
 };
-
-
-// if logout button is clicked this function will run.
-/*
-function logout() {
-
-    // make the input field blank
-    document.querySelector("#user").value = "";
-    document.querySelector("#pwd").value = "";
-
-    // add or remove class to hide or show the element.
-    hide(boxField);
-    show(loginFormField);
-
-    // login false
-    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: false }));
-};
- */

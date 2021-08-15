@@ -57,4 +57,6 @@ function welcome(username, password, fullname) {
     document.getElementById("fullName-dash").innerText = fullname;
 }
 
-// logout
+function logout() {
+    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: false }));
+}
