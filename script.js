@@ -50,14 +50,14 @@ function hide(element) {
 
 // last login status and name
 
-let lastLoggedIn = JSON.parse(localStorage.getItem("last-logged-in"));
-if (lastLoggedIn === null) {
-    localStorage.setItem("last-logged-in", JSON.stringify({ status: false }));
+if (localStorage.getItem("last-logged-in") === null) {
+    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: false }));
 }
 
+let lastLoggedIn = JSON.parse(localStorage.getItem("last-logged-in"));
 
 function lastLoggedInStatus() {
-    if (JSON.parse(localStorage.getItem("last-logged-in")).status == true) {
+    if (lastLoggedIn.status == true) {
         window.location.href = "dashboard"
     } else {
         window.location.href
