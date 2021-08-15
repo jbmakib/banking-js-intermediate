@@ -2,15 +2,15 @@
 // if new user arrive use push method
 
 var loginVar = [{
-        fullName: "Jawad Bin Mobin Akib",
-        userName: "jbmakib",
-        passWord: "1234"
-    },
-    {
-        fullName: "Nusrat Jahan Ananya",
-        userName: "nusuananya",
-        passWord: "1234"
-    }
+    fullName: "Jawad Bin Mobin Akib",
+    userName: "jbmakib",
+    passWord: "1234"
+},
+{
+    fullName: "Nusrat Jahan Ananya",
+    userName: "nusuananya",
+    passWord: "1234"
+}
 ];
 
 
@@ -49,10 +49,10 @@ function hide(element) {
 
 
 // last login status and name
-let loggedInStatus = false;
-let lastLoginName;
-let loggedInStatusObj = JSON.parse(localStorage.getItem("last-logged-in"));
-let loggedInNameObj = localStorage.getItem("last-logged-in-user");
+JSON.parse(localStorage.getItem("last-logged-in")).status = false;
+
+let lastLoggedIn = JSON.parse(localStorage.getItem("last-logged-in"));
+console.log(lastLoggedIn)
 
 function welcome(fullName) {
     show(boxField);
@@ -60,8 +60,8 @@ function welcome(fullName) {
 };
 
 function lastLoggedInStatus() {
-    if (loggedInStatusObj == true) {
-        welcome(loggedInNameObj);
+    if (lastLoggedIn.status == true) {
+        welcome(lastLoggedIn.user);
         hide(loginFormField);
         hide(signUpFormField);
     }
@@ -96,10 +96,8 @@ function login(e) {
             welcome(fullName);
 
             // login true
-            loggedInStatus = true;
-            loggedInStatusStr = JSON.stringify(loggedInStatusObj);
-            localStorage.setItem("last-logged-in", loggedInStatus);
-            localStorage.setItem("last-logged-in-user", fullName);
+            localStorage.setItem("last-logged-in", JSON.stringify({ user: loginVar[i].fullName, userID: loginVar[i].userName, password: loginVar[i].passWord, status: true }));
+
         } else if ((usernameField != "" && usernameField == loginVar[i].userName) && (pwdField != "" && pwdField != loginVar[i].passWord)) {
             window.alert("Password not matched");
             return;
@@ -110,7 +108,7 @@ function login(e) {
 
     // check is the user exist
     function userExists(username) {
-        return loginVar.some(function(el) {
+        return loginVar.some(function (el) {
             return el.userName === username;
         });
     };
@@ -207,10 +205,9 @@ function signUp(e) {
     welcome(fullName);
 
     // login true
-    loggedInStatus = true;
-    loggedInStatusStr = JSON.stringify(loggedInStatusObj);
-    localStorage.setItem("last-logged-in", loggedInStatus);
-    localStorage.setItem("last-logged-in-user", fullName);
+
+    localStorage.setItem("last-logged-in", JSON.stringify({ user: fullNameSign, userID: userName, password: signpwd, status: true }));
+
 }
 
 
@@ -225,8 +222,6 @@ function logout() {
     hide(boxField);
     show(loginFormField);
 
-    // login true
-    loggedInStatus = false;
-    loggedInStatusStr = JSON.stringify(loggedInStatusObj);
-    localStorage.setItem("last-logged-in", loggedInStatus);
+    // login false
+    localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: false }));
 }
