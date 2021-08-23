@@ -1,4 +1,5 @@
 let lastLoggedInData = JSON.parse(localStorage.getItem("last-logged-in"));
+let totalReceiptsFromServer = JSON.parse(localStorage.getItem("total-reciept"));
 
 if (lastLoggedInData === null) {
     localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: "F1fis8x6fsPxptlbjmEFE6g9dxw1Qi0gHAc0ykhsEQE=" }));
@@ -7,6 +8,20 @@ if (lastLoggedInData === null) {
 if (JSON.parse(localStorage.getItem("last-logged-in")).status != "knvteHd+BZKZDQuvi9nDsS8IO+o4cr33/fgmPqCFAIY=") {
     window.location.href = "../";
 };
+
+if (totalReceiptsFromServer !== null) {
+    for (const reciept of totalReceiptsFromServer) {
+        const tableRow = document.createElement("tr");
+        tableRow.innerHTML = `
+            <td class="border px-8 py-4" id="show">${reciept.date}</td>
+            <td class="border px-8 py-4" id="show2">${reciept.time}</td>
+            <td class="border px-8 py-4">${reciept.type}</td>
+            <td class="border px-8 py-4">${reciept.amount}</td>
+            <td class="border px-8 py-4 text-red-300">This Section Will Be Updated Soon</td>
+        `;
+        document.getElementById("reciept-table").appendChild(tableRow);
+    }
+}
 
 // check the name of user
 document.getElementById("fullName-dash").innerText = lastLoggedInData.user;
@@ -28,6 +43,8 @@ function balanceTotalFunc() {
     document.getElementById("balance-total").innerText = total;
 };
 
+const totalReceipts = [];
+
 function reciept(type, amount) {
     const dateAndTime = new Date();
     const date = `${dateAndTime.getDate()}-${dateAndTime.getMonth() + 1}-${dateAndTime.getFullYear()}`;
@@ -41,6 +58,8 @@ function reciept(type, amount) {
     <td class="border px-8 py-4 text-red-300">This Section Will Be Updated Soon</td>
     `;
     document.getElementById("reciept-table").appendChild(tableRow);
+    totalReceipts.push({ date: date, time: time, type: type, amount: amount });
+    localStorage.setItem("total-reciept", JSON.stringify(totalReceipts));
 }
 
 // deposit
