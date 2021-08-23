@@ -25,7 +25,7 @@ function balanceTotalFunc() {
     const withdrawed = parseFloat(document.getElementById("withdraw-total").innerText);
     const total = deposited - withdrawed;
     document.getElementById("balance-total").innerText = total;
-}
+};
 
 // deposit
 document.getElementById('deposit-button').addEventListener("click", function (e) {
@@ -51,13 +51,10 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
     const newDepositAmount = parseFloat(depositInput.value);
     if (newDepositAmount <= 0) {
         window.alert("You can't deposit less than or equal to taka zero");
-        return;
-    }
-
-
-    // update deposit total
-    selfTotal("deposit-total", newDepositAmount);
-    balanceTotalFunc();
+    } else {
+        selfTotal("deposit-total", newDepositAmount);
+        balanceTotalFunc();
+    };
 
     // clear input field
     depositInput.value = '';
@@ -67,7 +64,6 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
 // withdraw
 document.getElementById("withdraw-button").addEventListener("click", function (e) {
     e.preventDefault();
-
 
     // get the pass
     const inpPass = document.getElementById("withdraw-password");
@@ -92,15 +88,12 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
         return;
     }
     const newWithdrawAmount = parseFloat(withdrawInput.value);
-    const balanceTotal = document.getElementById("balance-total");
-    const previousBalanceTotal = parseFloat(balanceTotal.innerText);
 
     // returns if previuos balane is smaller than withdraw.
-    if (newWithdrawAmount <= 0 && newWithdrawAmount > previousBalanceTotal) {
+    if (newWithdrawAmount <= 0 && newWithdrawAmount > parseFloat(document.getElementById("balance-total").innerText)) {
         window.alert("Please withdraw the amount between zero and the value what you have.");
         return;
     };
-
 
     // set withdraw total
     selfTotal("withdraw-total", newWithdrawAmount);
@@ -110,7 +103,6 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
     withdrawInput.value = '';
     inpPass.value = "";
 });
-
 
 function logout() {
     localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: "F1fis8x6fsPxptlbjmEFE6g9dxw1Qi0gHAc0ykhsEQE=" }));
