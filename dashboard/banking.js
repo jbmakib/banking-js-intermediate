@@ -1,5 +1,6 @@
-let lastLoggedInData = JSON.parse(localStorage.getItem("last-logged-in"));
-let totalReceiptsFromServer = JSON.parse(localStorage.getItem("total-reciept"));
+const lastLoggedInData = JSON.parse(localStorage.getItem("last-logged-in"));
+const totalReceiptsFromServer = JSON.parse(localStorage.getItem("total-reciept"));
+const savedTotalsToServer = JSON.parse(localStorage.getItem("saved-totals"))
 
 if (lastLoggedInData === null) {
     localStorage.setItem("last-logged-in", JSON.stringify({ user: "", userID: "", password: "", status: "F1fis8x6fsPxptlbjmEFE6g9dxw1Qi0gHAc0ykhsEQE=" }));
@@ -21,6 +22,15 @@ if (totalReceiptsFromServer !== null) {
         `;
         document.getElementById("reciept-table").appendChild(tableRow);
     }
+};
+
+if (savedTotalsToServer !== null) {
+    for (const totals of savedTotalsToServer) {
+        document.getElementById("deposit-total").innerText = totals.deposited;
+        document.getElementById("withdraw-total").innerText = totals.withdrawed;
+        document.getElementById("balance-total").innerText = totals.total;
+        console.log(totals.total);
+    }
 }
 
 // check the name of user
@@ -32,7 +42,9 @@ function selfTotal(totalField, inputFieldValue, type) {
     const previuosAmount = parseFloat(document.getElementById(totalField).innerText);
     const newSelfTotal = previuosAmount + inputFieldValue;
     document.getElementById(totalField).innerText = newSelfTotal;
+    balanceTotalFunc();
     reciept(type, inputFieldValue);
+    commandSaveTotals();
 };
 
 // update the total amount
@@ -44,6 +56,7 @@ function balanceTotalFunc() {
 };
 
 const totalReceipts = [];
+const savedTotal = [];
 
 function reciept(type, amount) {
     const dateAndTime = new Date();
@@ -60,6 +73,16 @@ function reciept(type, amount) {
     document.getElementById("reciept-table").appendChild(tableRow);
     totalReceipts.push({ date: date, time: time, type: type, amount: amount });
     localStorage.setItem("total-reciept", JSON.stringify(totalReceipts));
+}
+
+function commandSaveTotals() {
+    const deposited = parseFloat(document.getElementById("deposit-total").innerText);
+    const withdrawed = parseFloat(document.getElementById("withdraw-total").innerText);
+    const total = parseFloat(document.getElementById("balance-total").innerText);
+    console.log(total)
+    savedTotal[0] = { deposited: deposited, withdrawed: withdrawed, total: total };
+    console.log(total)
+    localStorage.setItem("saved-totals", JSON.stringify(savedTotal));
 }
 
 // deposit
@@ -86,7 +109,6 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
         window.alert("You can't deposit less than or equal to taka zero");
     } else {
         selfTotal("deposit-total", newDepositAmount, "Deposit");
-        balanceTotalFunc();
     };
 
     // clear input field
@@ -122,7 +144,6 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
 
     // set withdraw total
     selfTotal("withdraw-total", newWithdrawAmount, "Withdraw");
-    balanceTotalFunc();
 
     // clear input field
     document.getElementById("withdraw-input").value = '';
