@@ -33,8 +33,6 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
 
     // get the pass
     const inpPass = document.getElementById("deposit-password");
-    // get the amount deposited
-    const depositInput = document.getElementById('deposit-input');
 
     // return if the password or ammount is blank
     if (document.getElementById('deposit-input').value == "" || inpPass.value == "") {
@@ -48,7 +46,7 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
         return;
     };
 
-    const newDepositAmount = parseFloat(depositInput.value);
+    const newDepositAmount = parseFloat(document.getElementById('deposit-input').value);
     if (newDepositAmount <= 0) {
         window.alert("You can't deposit less than or equal to taka zero");
     } else {
@@ -57,7 +55,7 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
     };
 
     // clear input field
-    depositInput.value = '';
+    document.getElementById('deposit-input').value = '';
     inpPass.value = "";
 });
 
@@ -67,27 +65,19 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
 
     // get the pass
     const inpPass = document.getElementById("withdraw-password");
-    // get the amount withdrawed
-    const withdrawInput = document.getElementById("withdraw-input");
 
     // return if the password or ammount is blank
-    if (withdrawInput.value == "" && inpPass.value == "") {
-        window.alert("WithDraw Amount and Password can't be blank");
+    if (document.getElementById("withdraw-input").value == "" || inpPass.value == "") {
+        window.alert("WithDraw Amount or Password can't be blank");
         return;
-    } else if (withdrawInput.value == "") {
-        window.alert("Please Enter Valid Withdraw Amount");
-        return;
-    } else if (inpPass.value == "") {
-        window.alert("Password can't be blank");
-        return;
-    }
+    };
 
     // return if the password not matched
     if (inpPass.value !== userPass) {
         window.alert("password not matched");
         return;
     }
-    const newWithdrawAmount = parseFloat(withdrawInput.value);
+    const newWithdrawAmount = parseFloat(document.getElementById("withdraw-input").value);
 
     // returns if previuos balane is smaller than withdraw.
     if (newWithdrawAmount <= 0 && newWithdrawAmount > parseFloat(document.getElementById("balance-total").innerText)) {
@@ -100,7 +90,7 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
     balanceTotalFunc();
 
     // clear input field
-    withdrawInput.value = '';
+    document.getElementById("withdraw-input").value = '';
     inpPass.value = "";
 });
 
