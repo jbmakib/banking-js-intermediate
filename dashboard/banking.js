@@ -12,11 +12,14 @@ if (JSON.parse(localStorage.getItem("last-logged-in")).status != "knvteHd+BZKZDQ
 document.getElementById("fullName-dash").innerText = lastLoggedInData.user;
 const userPass = lastLoggedInData.password;
 
-function selfTotal(totalField, inputField) {
+// function for updating it self value
+function selfTotal(totalField, inputFieldValue) {
     const previuosAmount = parseFloat(document.getElementById(totalField).innerText);
-    const newDepositTotal = previuosAmount + inputField;
-    document.getElementById(totalField).innerText = newDepositTotal;
+    const newSelfTotal = previuosAmount + inputFieldValue;
+    document.getElementById(totalField).innerText = newSelfTotal;
 };
+
+// update the total amount
 function balanceTotalFunc() {
     const deposited = parseFloat(document.getElementById("deposit-total").innerText);
     const withdrawed = parseFloat(document.getElementById("withdraw-total").innerText);
@@ -34,22 +37,17 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
     const depositInput = document.getElementById('deposit-input');
 
     // return if the password or ammount is blank
-    if (depositInput.value == "" && inpPass.value == "") {
-        window.alert("Deposit Amount and Password can't be blank");
+    if (document.getElementById('deposit-input').value == "" || inpPass.value == "") {
+        window.alert("Deposit Amount or Password can't be blank");
         return;
-    } else if (depositInput.value == "") {
-        window.alert("Please Enter Valid Deposit Amount");
-        return;
-    } else if (inpPass.value == "") {
-        window.alert("Password can't be blank");
-        return;
-    }
+    };
 
     // return if the password not matched
     if (inpPass.value !== userPass) {
         window.alert("password not matched");
         return;
-    }
+    };
+
     const newDepositAmount = parseFloat(depositInput.value);
     if (newDepositAmount <= 0) {
         window.alert("You can't deposit less than or equal to taka zero");
@@ -98,13 +96,10 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
     const previousBalanceTotal = parseFloat(balanceTotal.innerText);
 
     // returns if previuos balane is smaller than withdraw.
-    if (newWithdrawAmount <= 0) {
-        window.alert("You can;t withdraw less than or equal to taka zero");
+    if (newWithdrawAmount <= 0 && newWithdrawAmount > previousBalanceTotal) {
+        window.alert("Please withdraw the amount between zero and the value what you have.");
         return;
-    } else if (newWithdrawAmount > previousBalanceTotal) {
-        window.alert("You can't withdraw more amount than you have");
-        return;
-    }
+    };
 
 
     // set withdraw total
