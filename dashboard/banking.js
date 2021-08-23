@@ -12,6 +12,17 @@ if (JSON.parse(localStorage.getItem("last-logged-in")).status != "knvteHd+BZKZDQ
 document.getElementById("fullName-dash").innerText = lastLoggedInData.user;
 const userPass = lastLoggedInData.password;
 
+function selfTotal(totalField, inputField) {
+    const previuosAmount = parseFloat(document.getElementById(totalField).innerText);
+    const newDepositTotal = previuosAmount + inputField;
+    document.getElementById(totalField).innerText = newDepositTotal;
+};
+function balanceTotalFunc() {
+    const deposited = parseFloat(document.getElementById("deposit-total").innerText);
+    const withdrawed = parseFloat(document.getElementById("withdraw-total").innerText);
+    const total = deposited - withdrawed;
+    document.getElementById("balance-total").innerText = total;
+}
 
 // deposit
 document.getElementById('deposit-button').addEventListener("click", function (e) {
@@ -47,19 +58,9 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
 
 
     // update deposit total
-    const depositTotal = document.getElementById("deposit-total");
-    const previuosDepositAmount = parseFloat(depositTotal.innerText);
-    const newDepositTotal = previuosDepositAmount + newDepositAmount;
+    selfTotal("deposit-total", newDepositAmount);
+    balanceTotalFunc();
 
-    depositTotal.innerText = newDepositTotal;
-
-
-    // update account balance
-    const balanceTotal = document.getElementById("balance-total");
-    const previousBalanceTotal = parseFloat(balanceTotal.innerText);
-
-    const newBalanceTotal = previousBalanceTotal + newDepositAmount;
-    balanceTotal.innerText = newBalanceTotal;
     // clear input field
     depositInput.value = '';
     inpPass.value = "";
@@ -93,15 +94,6 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
         return;
     }
     const newWithdrawAmount = parseFloat(withdrawInput.value);
-
-    // set withdraw total
-    const withdrawTotal = document.getElementById("withdraw-total");
-    const previuosWithdrawTotal = parseFloat(withdrawTotal.innerText);
-
-    const newWithdrawTotal = previuosWithdrawTotal + newWithdrawAmount;
-
-
-    // update account balance
     const balanceTotal = document.getElementById("balance-total");
     const previousBalanceTotal = parseFloat(balanceTotal.innerText);
 
@@ -114,10 +106,10 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
         return;
     }
 
-    withdrawTotal.innerText = newWithdrawTotal;
 
-    const newBalanceTotal = previousBalanceTotal - newWithdrawAmount;
-    balanceTotal.innerText = newBalanceTotal;
+    // set withdraw total
+    selfTotal("withdraw-total", newWithdrawAmount);
+    balanceTotalFunc();
 
     // clear input field
     withdrawInput.value = '';
