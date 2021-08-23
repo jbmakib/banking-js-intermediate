@@ -192,9 +192,6 @@ function signUp(e) {
     hide(signUpFormField);
     show(boxField);
 
-    // add this into a variable.
-    var fullName = loginVar[loginVar.length - 1].fullName;
-
     // login true
 
     localStorage.setItem("last-logged-in", JSON.stringify({ user: fullNameSign, userID: userName, password: signpwd, status: "knvteHd+BZKZDQuvi9nDsS8IO+o4cr33/fgmPqCFAIY=" }));
