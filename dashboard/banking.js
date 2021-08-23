@@ -13,10 +13,11 @@ document.getElementById("fullName-dash").innerText = lastLoggedInData.user;
 const userPass = lastLoggedInData.password;
 
 // function for updating it self value
-function selfTotal(totalField, inputFieldValue) {
+function selfTotal(totalField, inputFieldValue, type) {
     const previuosAmount = parseFloat(document.getElementById(totalField).innerText);
     const newSelfTotal = previuosAmount + inputFieldValue;
     document.getElementById(totalField).innerText = newSelfTotal;
+    reciept(type, inputFieldValue);
 };
 
 // update the total amount
@@ -26,6 +27,21 @@ function balanceTotalFunc() {
     const total = deposited - withdrawed;
     document.getElementById("balance-total").innerText = total;
 };
+
+function reciept(type, amount) {
+    const dateAndTime = new Date();
+    const date = `${dateAndTime.getDate()}-${dateAndTime.getMonth() + 1}-${dateAndTime.getFullYear()}`;
+    const time = `${dateAndTime.getHours()}:${dateAndTime.getMinutes()}:${dateAndTime.getSeconds()}`;
+    const tableRow = document.createElement("tr");
+    tableRow.innerHTML = `
+    <td class="border px-8 py-4" id="show">${date}</td>
+    <td class="border px-8 py-4" id="show2">${time}</td>
+    <td class="border px-8 py-4">${type}</td>
+    <td class="border px-8 py-4">${amount}</td>
+    <td class="border px-8 py-4 text-red-300">This Section Will Be Updated Soon</td>
+    `;
+    document.getElementById("reciept-table").appendChild(tableRow);
+}
 
 // deposit
 document.getElementById('deposit-button').addEventListener("click", function (e) {
@@ -50,7 +66,7 @@ document.getElementById('deposit-button').addEventListener("click", function (e)
     if (newDepositAmount <= 0) {
         window.alert("You can't deposit less than or equal to taka zero");
     } else {
-        selfTotal("deposit-total", newDepositAmount);
+        selfTotal("deposit-total", newDepositAmount, "Deposit");
         balanceTotalFunc();
     };
 
@@ -86,7 +102,7 @@ document.getElementById("withdraw-button").addEventListener("click", function (e
     };
 
     // set withdraw total
-    selfTotal("withdraw-total", newWithdrawAmount);
+    selfTotal("withdraw-total", newWithdrawAmount, "Withdraw");
     balanceTotalFunc();
 
     // clear input field
